@@ -3,7 +3,7 @@
 #include <string.h>
 
 int arr_size, i, j;
-int** accounts = NULL;
+int** accounts = NULL; //int ** (Pointer to (array) of pointers to ints)
 
 void getData();
 void login();
@@ -96,7 +96,7 @@ void profile(int *account){
         printf("Current balance is: %d\n", account[2]);
     }
     else if (strcmp(u_in, _logout) == 0) return;
-    else if (strcmp(u_in, _exit) == 0) exit(1);
+    else if (strcmp(u_in, _exit) == 0) exit(0);
     else printf("Input is incorect. Please try again.\n");
     profile(account);
 
@@ -118,6 +118,10 @@ void draw(int *account){
     int moneyDraw;
     printf("Please enter the amount you wish to Draw: \n>>>");
     scanf("%d", &moneyDraw);
+    if (moneyDraw > account[2]){
+        printf("The amount cannot be greater than your current balance.\n");
+        return;
+    }
     if(moneyDraw <0){
         printf("The amount to draw cannot be less than 0. Please try again.\n");
         return;
